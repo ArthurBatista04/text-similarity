@@ -3,10 +3,15 @@
 ; referencia https://en.wikipedia.org/wiki/Levenshtein_distance
 
 (define (levenshtein text1 text2) ;retorna um valor entre 0-1 com 1 indicando identicos e 0 totalmente diferentes
-    (if (>= (string-length text1) (string-length text2)) ;a string que possui maior comprimento
-         (- 1 ( / (calculteLevenshtein text1 text2 (string-length text1) (string-length text2)) (string-length text1)))     
-         (- 1 ( / (calculteLevenshtein text1 text2 (string-length text1) (string-length text2)) (string-length text2)))     
+    (if (and (= (string-length text1) 0) (= (string-length text2) 0)) ;; verifica se as strings são ambas vazias e retorna 1 se forem
+        1.0
+        (if (>= (string-length text1) (string-length text2)) ;a string que possui maior comprimento
+            (- 1 ( / (calculteLevenshtein text1 text2 (string-length text1) (string-length text2)) (string-length text1)))     
+            (- 1 ( / (calculteLevenshtein text1 text2 (string-length text1) (string-length text2)) (string-length text2)))     
+        )
+
     )
+    
    
 )
 
@@ -32,5 +37,4 @@
     )
 )
 
-(levenshtein "arthur" "douglas")
-;;(levenshtein "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu arcu urna. Etiam ullamcorper lorem turpis, id vulputate sapien ultrices in. Morbi eget neque porta, sagittis dolor eget, tincidunt diam. Vestibulum auctor purus ac mattis aliquam. Mauris finibus id sapien vitae tempor. Phasellus ac est ut nisl lobortis faucibus. In ullamcorper congue turpis, vel placerat ligula pellentesque at. Quisque mollis magna eget finibus bibendum. Vivamus sed sapien id justo volutpat gravida. Proin euismod vestibulum mattis. " "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu arcu urna. Etiam ullamcorper lorem turpis, id vulputate sapien ultrices in. Morbi eget neque porta, sagittis dolor eget, tincidunt diam. Vestibulum auctor purus ac mattis aliquam. Mauris finibus id sapien vitae tempor. Phasellus ac est ut nisl lobortis faucibus. In ullamcorper congue turpis, vel placerat ligula pellentesque at. Quisque mollis magna eget finibus bibendum. Vivamus sed sapien id justo volutpat gravida. Proin euismod vestibulum mattis. ")
+(provide levenshtein)

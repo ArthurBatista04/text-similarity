@@ -3,8 +3,12 @@
 ; referencia https://en.wikipedia.org/wiki/Jaccard_index
 
 (define/memo (jaccard text1 text2) ;retorna um valor entre 0-1 com 1 indicando identicos e 0 totalmente diferentes
-   (exact->inexact(/ (countIntersectionOfWords (makeSetOfWords text1) (makeSetOfWords text2)) 
+    (if (and (= (countSetOfWords text1) 0) (= (countSetOfWords text2) 0))  ;; se a quantidade de palavras em ambos os textos forem zero retorna 1
+        1.0
+        (exact->inexact(/ (countIntersectionOfWords (makeSetOfWords text1) (makeSetOfWords text2)) 
                     (- (+ (countSetOfWords text1) (countSetOfWords text2)) (countIntersectionOfWords (makeSetOfWords text1) (makeSetOfWords text2)))))
+    )
+    
 )
 
 (define (makeSetOfWords text) ;; transforma uma string em um conjunto de palavras
@@ -19,10 +23,4 @@
     (set-count (list->set (string-split text)))
 )
 
-
-
-
-(jaccard "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu arcu urna. Etiam ullamcorper lorem turpis, id vulputate sapien ultrices in. Morbi eget neque porta, sagittis dolor eget, tincidunt diam. Vestibulum auctor purus ac mattis aliquam. Mauris finibus id sapien vitae tempor. Phasellus ac est ut nisl lobortis faucibus. In ullamcorper congue turpis, vel placerat ligula pellentesque at. Quisque mollis magna eget finibus bibendum. Vivamus sed sapien id justo volutpat gravida. Proin euismod vestibulum mattis. " "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In eu arcu urna. Etiam ullamcorper lorem turpis, id vulputate sapien ultrices in. Morbi eget neque porta, sagittis dolor eget, tincidunt diam. Vestibulum auctor purus ac mattis aliquam. Mauris finibus id sapien vitae tempor. Phasellus ac est ut nisl lobortis faucibus. In ullamcorper congue turpis, vel placerat ligula pellentesque at. Quisque mollis magna eget finibus bibendum. Vivamus sed sapien id justo volutpat gravida. Proin euismod vestibulum mattis. ")
-
-
-
+(provide jaccard)
