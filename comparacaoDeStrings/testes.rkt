@@ -19,6 +19,8 @@
         (check-equal? (levenshtein textoIgualA textoIgualB) 1.0) ;; caso sejam iguais
         (check-equal? (levenshtein textoDiferenteA textoDiferenteB) 0.0) ;; caso sejam totalmente diferentes
         (check-equal? (levenshtein " " " ") 1.0) ;;testes com strings vazias
+        (check-equal? (calculateLevenshtein "abc" "abcdef" 3 6 ) 3.0) ; a diferenca é de 3 caracteres
+        (check-equal? (calculateLevenshtein "abc" "abc" 3 3) 0.0) ; a diferenca é de 0 caracteres
     )
 )
 
@@ -28,6 +30,8 @@
         (check-equal? (jaccard textoIgualA textoIgualB) 1.0) ;; caso sejam iguais
         (check-equal? (jaccard textoDiferenteA textoDiferenteB) 0.0) ;; caso sejam totalmente diferentes
         (check-equal? (jaccard " " " ") 1.0) ;; testes com strings vazias
+        (check-equal? (countSetOfWords "este teste tem 5 palavras") 5) ;; verifica se tem 5 palavras no texto
+        (check-equal? (countIntersectionOfWords (makeSetOfWords "este teste tem 7 palavras em comum") (makeSetOfWords "este teste tem 7 palavras em comum")) 7) ;; verifica se a quantidade comum de palavras é igual a 7
     )
 )
 

@@ -23,4 +23,4 @@
     (set-count (list->set (string-split text)))
 )
 
-(provide jaccard)
+(provide jaccard countSetOfWords countIntersectionOfWords makeSetOfWords)
