@@ -68,5 +68,11 @@
      (length l))
 )
 
-(correlacao levenshteinList resultadoEsperadoList)
-(correlacao jaccardList resultadoEsperadoList)
+(define correlacaoDeLevenshtein (correlacao jaccardList resultadoEsperadoList))
+(define correlacaoDeJaccard (correlacao levenshteinList resultadoEsperadoList))
+
+
+(if (>= correlacaoDeJaccard correlacaoDeLevenshtein)
+    (printf "Jaccard possui correlação maior com o resultado esperado, ~a, em comparação à ~a de Levenshtein " correlacaoDeJaccard correlacaoDeLevenshtein)
+    (printf "Levenshtein possui correlação maior com o resultado esperado, ~a, em comparação à ~a de Jaccard " correlacaoDeLevenshtein correlacaoDeJaccard)
+)
